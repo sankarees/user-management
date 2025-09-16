@@ -1,0 +1,18 @@
+1. create a DB in citus
+2. create a table in citus
+3. insert some rows
+4. shard the table
+5. build a springboot application to do CRUD on the table
+
+
+https://www.citusdata.com/blog/2023/07/18/citus-12-schema-based-sharding-for-postgres/
+
+https://www.citusdata.com/blog/2023/08/04/understanding-partitioning-and-sharding-in-postgres-and-citus/
+
+
+docker pull citusdata/citus:11.2
+
+docker-compose down -v
+docker-compose up -d
+
+

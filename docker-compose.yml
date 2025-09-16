@@ -1,0 +1,16 @@
+services:
+  citus_master:
+    image: citusdata/citus:11.2
+    container_name: citus_master
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  citus_worker:
+    image: citusdata/citus:11.2
+    container_name: citus_worker
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
