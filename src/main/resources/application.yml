@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/userdb
+    url: jdbc:postgresql://citus_master:5432/userdb
     username: postgres
     password: mysecretpassword
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: none # Or 'none' based on your preference
     show-sql: true

@@ -2,15 +2,37 @@ services:
   citus_master:
     image: citusdata/citus:11.2
     container_name: citus_master
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: mysecretpassword
     volumes:
       - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - user-mgmt-net
+    ports:
+      - "5432:5432"
 
   citus_worker:
     image: citusdata/citus:11.2
     container_name: citus_worker
     environment:
       POSTGRES_PASSWORD: mysecretpassword
+    networks:
+      - user-mgmt-net
+
+  user-management-app:
+    image: user-management-app:latest
+    container_name: user-management-app
+    depends_on:
+      - citus_master
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://citus_master:5432/userdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: mysecretpassword
+    networks:
+      - user-mgmt-net
+    ports:
+      - "8080:8080"
+
+networks:
+  user-mgmt-net:
+    driver: bridge
