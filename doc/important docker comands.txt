@@ -1,0 +1,11 @@
+to run the docker
+	docker-compose up --build -d
+
+to check the running instances
+	docker ps -a
+
+how to check logs
+	docker logs -f
+	
+down the instances
+	docker-compose down

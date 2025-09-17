@@ -10,6 +10,7 @@ services:
       - user-mgmt-net
     ports:
       - "5432:5432"
+    restart: unless-stopped
 
   citus_worker:
     image: citusdata/citus:11.2
@@ -18,8 +19,10 @@ services:
       POSTGRES_PASSWORD: mysecretpassword
     networks:
       - user-mgmt-net
+    restart: unless-stopped
 
   user-management-app:
+    build: .
     image: user-management-app:latest
     container_name: user-management-app
     depends_on:
@@ -32,6 +35,7 @@ services:
       - user-mgmt-net
     ports:
       - "8080:8080"
+    restart: unless-stopped
 
 networks:
   user-mgmt-net:
